@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>内地榜</title>
+		<script src="js/userem.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/layui.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.layui-icon {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--banner图-->
+		<section class="banner">
+			<img src="img/neidibang.png" />
+		</section>
+
+		<!--排行榜-->
+		<section class="rankingList">
+			<div class="list">
+				<ul id="demo">
+					
+				</ul>
+				<div class="more">
+					<p>上拉加载更多</p>
+				</div>
+
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript">
+		//截取文字40个字符
+		var paihang_con = $('.list ul li a .content .text');
+		var phb_length = paihang_con.length;
+		for(var i = 0; i < phb_length; i++) {
+
+			var arr_text_paihang = paihang_con.eq(i).text();
+			var short_text_paihang = arr_text_paihang.substr(0, 40);
+			paihang_con.eq(i).text(short_text_paihang + '...');
+
+		}
+	</script>
+	<script type="text/javascript">
+		var lis = [];
+		$.post('http://star.fengbao.com/api/starResult', {
+				billboard: 'MainlandPopIdol'
+			},
+			function(data) {
+//				console.log(data);
+				var x = 0;
+				for(var i in data.data.billboard) {
+
+					if(x >= 50) {
+						break;
+					} else {
+						x++;
+					}
+
+					//截取文字40个字符
+					if(data.data.billboard[i].introduce.length > 40) {
+						data.data.billboard[i].introduce = data.data.billboard[i].introduce.substring(0, 39) + '...';
+
+					}
+					lis.push(
+						'<li>' +
+						'<a href="VotingPage.html?' +'star='+ i + '">' +
+						'<div class="num">' +
+						'<p>' + x + '</p>' +
+						//						'<img src="img/no1.png" />' +
+						'</div>' +
+						'<div class="touxiang">' +
+						'<img src="' + data.data.billboard[i].headimgurl + '" />' +
+						'</div>' +
+						'<div class="content">' +
+						'<p class="name">' + data.data.billboard[i].name + '</p>' +
+						'<p class="text">' + data.data.billboard[i].introduce + '</p>' +
+						'</div>' +
+						'<div class="heart">' +
+						'<img src="img/Heart.png" />' +
+						'</div>' +
+						'</a>' +
+						'</li>'
+					);
+				}
+				$('.list ul').append(lis);
+			});
+	</script>
+
+	<!--加载更多-->
+	<!--<script type="text/javascript">
+		layui.use('flow', function() {
+			var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+			var flow = layui.flow;
+			flow.load({
+				elem: '#demo' //指定列表容器
+					,
+				done: function(page, next) { //到达临界点（默认滚动触发），触发下一页
+					var lis = [];
+					//以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+					$.post('http://star.fengbao.com/api/starResult', {
+						billboard: 'MainlandPopIdol'
+					}, function(data) {
+
+						console.log(data);
+						//假设你的列表返回在data集合中
+						layui.each(data.data, function(index, item) {
+							lis.push('<li>' + item.title + '</li>');
+						});
+
+						//执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+						//pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+						next(lis.join(''), page < data.pages);
+					});
+				}
+			});
+		});
+	</script>
+-->
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>投票页</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/userem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!--banner图-->
+		<section class="banner" id="vote_banner">
+			<!--<img src="img/luhan-banner.png" />-->
+		</section>
+
+		<!--内容部分-->
+		<section class="vote">
+			<section class="introduce">
+				<div class="title">
+					<p class="name"></p>
+					<p class="ranking">排名：<span></span></p>
+					<p class="count">票数：<span></span></p>
+				</div>
+				<div class="content">
+					<p>
+					</p>
+				</div>
+			</section>
+
+			<section class="rule">
+				<p class="title">
+					投票规则
+				</p>
+				<div class="subTitle time">
+					<p class="tit">
+						投票时间：
+					</p>
+					<p class="text">
+						2017年05月01日起，2017年07月31日23点59分截止。
+					</p>
+				</div>
+
+				<div class="subTitle webset">
+					<p class="tit">
+						活动官方投票网站：
+					</p>
+					<p class="text">
+						网站投票区内每人每天限投1票。
+					</p>
+				</div>
+
+				<div class="subTitle award">
+					<p class="tit">奖励说明：</p>
+					<ul class="text">
+						<li>1.各类榜单累 计票数最高的艺人将获得年度最受欢迎大奖。</li>
+						<li>2.累计票数各榜单排名前20名的艺人将授予年度人气奖,出席年度盛典!</li>
+					</ul>
+				</div>
+
+			</section>
+
+			<div class="button">
+				<a><button>为他投票</button></a>
+			</div>
+
+		</section>
+		
+		<section class="vote_mask">
+			
+			<div class="hint">
+				<div class="title">
+					<p>您的投票机会已用完</p>
+				</div>
+				<div class="mask_confirm">
+					<button type="button">确定</button>
+				</div>
+				
+			</div>
+			
+		</section>
+
+		<script type="text/javascript">
+			var locationHref = window.location.href;
+			var arr_href = locationHref.split('=');
+			//console.log(arr_href);
+			var urlName = arr_href[1];
+			//console.log(urlName);
+
+			$.post('http://star.fengbao.com/api/starDetailProfile', {
+
+					star: urlName,
+					billboard: 'MainlandPopIdol'
+
+				},
+				function(data) {
+//					console.log(data);
+
+					var bannerImgUrl = data.data.profile.image; //banner图url
+					//console.log(bannerImgUrl);
+
+					var rank = data.data.vote.rank; //排名
+					var score = data.data.vote.score; //票数
+					var introduce = data.data.profile.abstract; //个人简介
+					var arr_js = introduce.split('，');
+					name = arr_js[0]; //名字
+
+					if(introduce.length >= 100) {
+						introduce = introduce.substr(0, 100) + '...';
+					}
+
+					$('section.banner').append('<img src="' + bannerImgUrl + '" />');
+					$('.introduce .title .name').html(name);
+					$('.introduce .title .ranking span').html(rank);
+					$('.introduce .title .count span').html(score);
+					$('.introduce .content p').html(introduce);
+
+
+				})
+
+			$('.button button').click(function() {
+				$.post('http://star.fengbao.com/api/vote', {
+					
+						star: urlName,
+						billboard: 'MainlandPopIdol'
+						
+					},
+					function(data) {
+						console.log(data);
+						var toUrl = 'voteSuccess.html?star=' + name;
+						var status = data.status;
+						var mask = $('.vote_mask');
+						if(status != -1){
+							window.location.href = toUrl;
+						}else{
+							mask.show();
+							if(mask.show()){
+								mask.click(function(){
+									mask.hide()
+								});
+							}
+						}
+						
+					})
+
+			})
+			$('.vote_mask .hint button').click(function(){
+				$('.vote_mask').hide();
+			})
+		</script>
+
+	</body>
+
+</html>

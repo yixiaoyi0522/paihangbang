@@ -1,0 +1,372 @@
+@charset 'utf-8';
+
+/*----初始化部分----*/
+
+html,
+body,
+section,
+div,
+ul,
+ol,
+li {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 0.5rem;
+}
+
+ul {
+    list-style: none;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/*----初始化部分结束----*/
+
+
+/*---banner图部分----*/
+
+.banner {
+    min-width: 100%;
+    max-width: 100%;
+    img {
+        display: block;
+        max-width: 100%;
+        min-width: 100%;
+        //      max-height: 10rem;
+    }
+}
+
+#vote_banner {
+    height: 12rem;
+    overflow: hidden;
+    img {
+        //      max-height: 12rem;
+    }
+}
+
+
+/*----排行榜标题-----*/
+
+.rankingList {
+    padding: 1rem 0.3rem;
+    >.title {
+        text-align: center;
+        >img {
+            width: 35%;
+            display: block;
+            margin: 0 auto;
+        }
+        p {
+            font-size: 0.6rem;
+        }
+    }
+    .list {
+        margin-top: 1rem;
+        ul,
+        ol {
+            li {
+                width: 100%;
+                position: relative;
+                a {
+                    display: block;
+                    color: #333;
+                    p {
+                        margin: 0 0 0.3rem 0;
+                    }
+                    >div {
+                        display: inline-block;
+                        height: 3rem;
+                    }
+                    .num {
+                        width: 1.5rem;
+                        position: relative;
+                        top: -1rem;
+                        text-align: center;
+                        p {
+                            font-size: 0.7rem;
+                            width: 1.3775rem;
+                            height: auto;
+                        }
+                    }
+                    .touxiang {
+                        width: 2.75rem;
+                        line-height: 3rem;
+                        margin-left: 0.2rem;
+                        img {
+                            width: 2.75rem;
+                            height: 2.75rem;
+                            border-radius: 50%;
+                            line-height: 3rem;
+                        }
+                    }
+                    .content {
+                        width: 10.75rem;
+                        margin-left: 0.2rem;
+                        p {
+                            width: 10.75rem;
+                        }
+                        p.name {
+                            font-size: 0.75rem;
+                        }
+                        p.text {
+                            font-size: 0.55rem;
+                        }
+                    }
+                    .heart {
+                        line-height: 3rem;
+                        width: 0.75rem;
+                        position: relative;
+                        top: -0.5rem;
+                        margin-left: 0.2rem;
+                        img {
+                            width: 0.75rem;
+                            height: auto;
+                        }
+                    }
+                }
+            }
+            li:first-child .num p,
+            li:nth-child(2) .num p,
+            li:nth-child(3) .num p {
+                display: none;
+            }
+            li:nth-child(1) .num:after,
+            li:nth-child(2) .num:after,
+            li:nth-child(3) .num:after {
+                content: '';
+                display: block;
+                max-width: 1.5rem;
+                height: 1.5rem;
+                position: relative;
+                top: 1.75rem;
+            }
+            li:nth-child(1) .num:after {
+                background: url(../img/no1.png) no-repeat center;
+                background-size: contain;
+            }
+            li:nth-child(2) .num:after {
+                background: url(../img/no2.png) no-repeat center;
+                background-size: contain;
+            }
+            li:nth-child(3) .num:after {
+                background: url(../img/no3.png) no-repeat center;
+                background-size: contain;
+            }
+        }
+    }
+    .more {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        button {
+            width: 9rem;
+            height: 2rem;
+            color: #fff;
+            font-size: 0.7rem;
+            background: #f8455a;
+            border: none;
+            outline: none;
+            border-radius: 0.2rem;
+        }
+        p {
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.vote {
+    padding: 1rem 0.5rem;
+    .introduce {
+        padding: 0 0.2rem;
+        .title {
+            p {
+                display: inline-block;
+                font-size: 0.5rem;
+                margin-right: 1rem;
+                span {
+                    color: #f8455a;
+                }
+            }
+            p.name {
+                font-size: 0.7rem;
+            }
+        }
+        .content {
+            font-size: 0.5rem;
+            p {
+                margin: 0;
+            }
+        }
+    }
+    .rule {
+        margin-top: 1rem;
+        font-size: 0.5rem;
+        .title {
+            font-size: 0.7rem;
+        }
+        .subTitle {
+            margin-top: 1rem;
+            p {
+                margin: 0 0 0.2rem 0;
+            }
+        }
+    }
+    .button {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        a{
+            display: block;
+        }
+        button {
+            width: 9rem;
+            height: 2rem;
+            color: #fff;
+            font-size: 0.7rem;
+            background: #f8455a;
+            border: none;
+            outline: none;
+            border-radius: 0.2rem;
+        }
+    }
+}
+
+
+/*  投票页弹窗             */
+
+html {
+    height: 100%;
+    body {
+        height: 100%;
+        .vote_mask {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            .hint {
+                z-index: 2;
+                opacity: 1;
+                width: 60%;
+                background: #fff;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -webkit-transform: translate(-50%, -50%);
+                padding-top: 1rem;
+                border-radius: 0.2rem;
+                .title {
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid #E5E5E5;
+                    p{
+                        font-size: 0.7rem;
+                    }
+                }
+                .mask_confirm {
+                    button {
+                        width: 100%;
+                        height: 2rem;
+                        background: #fff;
+                        border: none;
+                        outline: none;
+                        font-size: 0.6rem;
+                    }
+                }
+            }
+        }
+        .vote_mask:after {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: '.';
+            background: #000;
+            filter: alpha(opacity=50);
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+        }
+    }
+}
+
+.vote-success {
+    /*  padding-top: 2rem; */
+    .icon {
+        padding-top: 3.5rem;
+        text-align: center;
+        img {
+            display: inline-block;
+            width: 2.75rem;
+        }
+        p {
+            display: inline-block;
+            position: relative;
+            top: -1rem;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+        }
+    }
+    .thanks {
+        text-align: center;
+        position: relative;
+        top: -0.3rem;
+        p.text {
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+        p.flower {
+            display: inline-block;
+            img {
+                height: 0.8rem;
+            }
+        }
+    }
+    .button {
+        margin-top: 1rem;
+        text-align: center;
+        button {
+            width: 6rem;
+            height: 2rem;
+            color: #fff;
+            border: none;
+            outline: none;
+            border-radius: 0.2rem;
+            font-size: 0.7rem;
+        }
+        button.confirm {
+            margin-left: 0.8rem;
+            background: #f8455a;
+        }
+        button.back {
+            background: #bfbfbf;
+        }
+    }
+    .subtext {
+//      width: 75%;
+        margin: 3rem auto 0;
+        font-size: 0.6rem;
+        p {
+            text-align: center
+        }
+    }
+}

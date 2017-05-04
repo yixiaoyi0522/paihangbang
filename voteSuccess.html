@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>投票成功</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/userem.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<section class="vote-success">
+			<div class="icon">
+				<img src="img/icon-success.png" />
+				<p>投票成功</p>
+			</div>
+			<div class="thanks">
+				<p class="text">感谢您对 #<span id="star_name"></span># 的支持！</p>
+				<p class="flower">
+					<img src="img/flower.png" />
+					<img src="img/flower.png" />
+					<img src="img/flower.png" />
+				</p>
+			</div>
+			<div class="button">
+				<a href="index.html"><button class="back">返回</button></a>
+				<a href="javascript:history.go(-1);"><button class="confirm">确定</button></a>
+			</div>
+			<div class="subtext">
+				<p>* 你爱的Ta上榜了吗？</p>
+				<p>抓紧集合小伙伴的力量为你心中的偶像投票吧！</p>
+			</div>
+		</section>
+
+	</body>
+	<script type="text/javascript">
+		var locationHref = window.location.href;
+		var arr_href = locationHref.split('=');
+		//console.log(arr_href);
+		var urlName = arr_href[1];
+		//console.log(urlName);
+		var text_name = decodeURI(urlName);
+		//console.log(text_name);
+		$('#star_name').text(text_name);
+
+		$.post('http://star.fengbao.com/api/shareOut', {
+				token: 'token'
+			},
+			function(data) {
+				console.log(data);
+				var share_url = data.data.url;
+				console.log(share_url);
+				//				var share_wx = $(data.data.js);
+				//				console.log(share_wx);
+			})
+	</script>
+	<script type="text/javascript" charset="utf-8">
+		wx.config({!!$js!!
+		});
+		wx.ready(function() {
+			wx.checkJsApi({
+				jsApiList: [
+					'getLocation',
+					'onMenuShareTimeline',
+				],
+				success: function(res) {
+					//alert(JSON.stringify(res)); //判断当前客户端版本是否支持指定JS接口,上线删除
+				}
+			});
+			//分享到朋友圈
+			wx.onMenuShareTimeline({
+
+				title: '{{ $nickname }}邀请您【安装手机必备软件】', // 分享标题
+
+				link: "{!! $url !!}",
+
+				imgUrl: "http://wx.fengbao.com/img/weChatRedBag.jpg",
+				trigger: function(res) {
+					// 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+					//alert('用户点击分享到朋友圈');
+				},
+				success: function(res) {
+					//alert('已分享');
+					//weui.toast('分享成功!',3000);
+					$('#mask').hide();
+				},
+				cancel: function(res) {
+					//alert('已取消');
+				},
+				fail: function(res) {
+					//alert(JSON.stringify(res));
+					//weui.toast('分享失败,网络错误!',3000);
+				}
+
+			});
+			//分享给好友
+			wx.onMenuShareAppMessage({
+				title: '{{ $nickname }}邀请您【安装手机必备软件】', // 分享标题
+				desc: '常用软件合集，包含安全/清理/视频/音频/浏览器/输入法等必备软件', // 分享描述
+				link: '{!! $url !!}', // 分享链接
+				imgUrl: 'http://wx.fengbao.com/img/weChatRedBag.jpg', // 分享图标
+				type: '', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function() {
+					// 用户确认分享后执行的回调函数
+					//alert('用户确认分享!');
+					$('#mask').hide();
+				},
+				cancel: function() {
+					// 用户取消分享后执行的回调函数
+					//alert('用户取消分享!');
+				}
+			});
+			wx.onMenuShareQQ({
+				title: '{{ $nickname }}邀请您【安装手机必备软件】', // 分享标题
+				desc: '常用软件合集，包含安全/清理/视频/音频/浏览器/输入法等必备软件', // 分享描述
+				link: '{!! $url !!}', // 分享链接
+				imgUrl: 'http://wx.fengbao.com/img/weChatRedBag.jpg', // 分享图标
+				success: function() {
+					// 用户确认分享后执行的回调函数
+					$('#mask').hide();
+				},
+				cancel: function() {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+			wx.onMenuShareQZone({
+				title: '{{ $nickname }}邀请您【安装手机必备软件】', // 分享标题
+				desc: '常用软件合集，包含安全/清理/视频/音频/浏览器/输入法等必备软件', // 分享描述
+				link: '{!! $url !!}', // 分享链接
+				imgUrl: 'http://wx.fengbao.com/img/weChatRedBag.jpg', // 分享图标
+				success: function() {
+					// 用户确认分享后执行的回调函数
+					$('#mask').hide();
+				},
+				cancel: function() {
+					// 用户取消分享后执行的回调函数
+				}
+			});
+
+		});
+	</script>
+	<script>
+		function is_weixin() {
+			var ua = navigator.userAgent.toLowerCase();
+			return(ua.match(/MicroMessenger/i) == "micromessenger")
+		}
+	</script>
+
+</html>

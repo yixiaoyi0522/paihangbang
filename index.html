@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页</title>
+		<script src="js/userem.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!--banner图-->
+		<section class="banner">
+			<img src="img/banner.png" />
+		</section>
+
+		<!--排行榜-->
+		<section class="rankingList">
+			<div class="title">
+				<a href="test2.html"><img src="img/paihangbang-title.png" /></a>
+				<p>距离下次更新还有 <span id="timer"></span></p>
+			</div>
+			<div class="list">
+				<ul>
+
+				</ul>
+				<div class="more">
+					<a href="paihang_total.html"><button>点击查看更多</button></a>
+				</div>
+
+			</div>
+		</section>
+	</body>
+
+	<!--获取数据-->
+	<script type="text/javascript">
+		var lis = [];
+		$.post('http://star.fengbao.com/api/starResult', {
+				billboard: 'MainlandPopIdol'
+			},
+			function(data) {
+				console.log(data);
+				var x = 0;
+
+				for(var i in data.data.billboard) {
+					fresh_time = data.data.fresh;
+					//					console.log(i);
+
+					if(x >= 7) {
+						break;
+					} else {
+						x++;
+					}
+
+					//截取文字40个字符
+					if(typeof(data.data.billboard[i].introduce) != undefined  && data.data.billboard[i].introduce.length > 40) {
+						data.data.billboard[i].introduce = data.data.billboard[i].introduce.substring(0, 39) + '...';
+
+					}
+
+					lis.push(
+						'<li>' +
+						'<a href="VotingPage.html?' + 'star=' + i + '">' +
+						'<div class="num">' +
+						'<p>' + x + '</p>' +
+						//'<img src="img/no1.png" />' +
+						'</div>' +
+						'<div class="touxiang">' +
+						'<img src="' + data.data.billboard[i].headimgurl + '" />' +
+						'</div>' +
+						'<div class="content">' +
+						'<p class="name">' + data.data.billboard[i].name + '</p>' +
+						'<p class="text">' + data.data.billboard[i].introduce + '</p>' +
+						'</div>' +
+						'<div class="heart">' +
+						'<img src="img/Heart.png" />' +
+						'</div>' +
+						'</a>' +
+						'</li>'
+					);
+
+				}
+				$('.list ul').append(lis);
+			});
+
+		function CountDown() {
+
+			if(fresh_time > 0) {
+				fresh_time--;
+				minutes = Math.floor(fresh_time / 60) < 10 ? ('0' + Math.floor(fresh_time / 60)) : Math.floor(fresh_time / 60);
+				seconds = (fresh_time % 60) < 10 ? ('0' + fresh_time % 60) : fresh_time % 60;
+				msg = minutes + ':' + seconds;
+				document.all["timer"].innerHTML = msg;
+
+			} else {
+				clearInterval(timer);
+				location.reload()
+
+			}
+		}
+		setInterval("CountDown()", 1000);
+
+		$("body").on("click", "body", function() {
+			console.log($('ul li'))
+		});
+	</script>
+
+</html>

@@ -1,0 +1,363 @@
+@charset 'utf-8';
+/*----初始化部分----*/
+html,
+body,
+section,
+div,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-size: 0.5rem;
+}
+ul {
+  list-style: none;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  zoom: 1;
+}
+a {
+  text-decoration: none;
+}
+/*----初始化部分结束----*/
+/*---banner图部分----*/
+.banner {
+  min-width: 100%;
+  max-width: 100%;
+}
+.banner img {
+  display: block;
+  max-width: 100%;
+  min-width: 100%;
+}
+#vote_banner {
+  height: 12rem;
+  overflow: hidden;
+}
+/*----排行榜标题-----*/
+.rankingList {
+  padding: 1rem 0.3rem;
+}
+.rankingList > .title {
+  text-align: center;
+}
+.rankingList > .title > img {
+  width: 35%;
+  display: block;
+  margin: 0 auto;
+}
+.rankingList > .title p {
+  font-size: 0.6rem;
+}
+.rankingList .list {
+  margin-top: 1rem;
+}
+.rankingList .list ul li,
+.rankingList .list ol li {
+  width: 100%;
+  position: relative;
+}
+.rankingList .list ul li a,
+.rankingList .list ol li a {
+  display: block;
+  color: #333;
+}
+.rankingList .list ul li a p,
+.rankingList .list ol li a p {
+  margin: 0 0 0.3rem 0;
+}
+.rankingList .list ul li a > div,
+.rankingList .list ol li a > div {
+  display: inline-block;
+  height: 3rem;
+}
+.rankingList .list ul li a .num,
+.rankingList .list ol li a .num {
+  width: 1.5rem;
+  position: relative;
+  top: -1rem;
+  text-align: center;
+}
+.rankingList .list ul li a .num p,
+.rankingList .list ol li a .num p {
+  font-size: 0.7rem;
+  width: 1.3775rem;
+  height: auto;
+}
+.rankingList .list ul li a .touxiang,
+.rankingList .list ol li a .touxiang {
+  width: 2.75rem;
+  line-height: 3rem;
+  margin-left: 0.2rem;
+}
+.rankingList .list ul li a .touxiang img,
+.rankingList .list ol li a .touxiang img {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  line-height: 3rem;
+}
+.rankingList .list ul li a .content,
+.rankingList .list ol li a .content {
+  width: 10.75rem;
+  margin-left: 0.2rem;
+}
+.rankingList .list ul li a .content p,
+.rankingList .list ol li a .content p {
+  width: 10.75rem;
+}
+.rankingList .list ul li a .content p.name,
+.rankingList .list ol li a .content p.name {
+  font-size: 0.75rem;
+}
+.rankingList .list ul li a .content p.text,
+.rankingList .list ol li a .content p.text {
+  font-size: 0.55rem;
+}
+.rankingList .list ul li a .heart,
+.rankingList .list ol li a .heart {
+  line-height: 3rem;
+  width: 0.75rem;
+  position: relative;
+  top: -0.5rem;
+  margin-left: 0.2rem;
+}
+.rankingList .list ul li a .heart img,
+.rankingList .list ol li a .heart img {
+  width: 0.75rem;
+  height: auto;
+}
+.rankingList .list ul li:first-child .num p,
+.rankingList .list ol li:first-child .num p,
+.rankingList .list ul li:nth-child(2) .num p,
+.rankingList .list ol li:nth-child(2) .num p,
+.rankingList .list ul li:nth-child(3) .num p,
+.rankingList .list ol li:nth-child(3) .num p {
+  display: none;
+}
+.rankingList .list ul li:nth-child(1) .num:after,
+.rankingList .list ol li:nth-child(1) .num:after,
+.rankingList .list ul li:nth-child(2) .num:after,
+.rankingList .list ol li:nth-child(2) .num:after,
+.rankingList .list ul li:nth-child(3) .num:after,
+.rankingList .list ol li:nth-child(3) .num:after {
+  content: '';
+  display: block;
+  max-width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  top: 1.75rem;
+}
+.rankingList .list ul li:nth-child(1) .num:after,
+.rankingList .list ol li:nth-child(1) .num:after {
+  background: url(../img/no1.png) no-repeat center;
+  background-size: contain;
+}
+.rankingList .list ul li:nth-child(2) .num:after,
+.rankingList .list ol li:nth-child(2) .num:after {
+  background: url(../img/no2.png) no-repeat center;
+  background-size: contain;
+}
+.rankingList .list ul li:nth-child(3) .num:after,
+.rankingList .list ol li:nth-child(3) .num:after {
+  background: url(../img/no3.png) no-repeat center;
+  background-size: contain;
+}
+.rankingList .more {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+.rankingList .more button {
+  width: 9rem;
+  height: 2rem;
+  color: #fff;
+  font-size: 0.7rem;
+  background: #f8455a;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+}
+.rankingList .more p {
+  font-size: 0.7rem;
+}
+.vote {
+  padding: 1rem 0.5rem;
+}
+.vote .introduce {
+  padding: 0 0.2rem;
+}
+.vote .introduce .title p {
+  display: inline-block;
+  font-size: 0.5rem;
+  margin-right: 1rem;
+}
+.vote .introduce .title p span {
+  color: #f8455a;
+}
+.vote .introduce .title p.name {
+  font-size: 0.7rem;
+}
+.vote .introduce .content {
+  font-size: 0.5rem;
+}
+.vote .introduce .content p {
+  margin: 0;
+}
+.vote .rule {
+  margin-top: 1rem;
+  font-size: 0.5rem;
+}
+.vote .rule .title {
+  font-size: 0.7rem;
+}
+.vote .rule .subTitle {
+  margin-top: 1rem;
+}
+.vote .rule .subTitle p {
+  margin: 0 0 0.2rem 0;
+}
+.vote .button {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+.vote .button a {
+  display: block;
+}
+.vote .button button {
+  width: 9rem;
+  height: 2rem;
+  color: #fff;
+  font-size: 0.7rem;
+  background: #f8455a;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+}
+/*  投票页弹窗             */
+html {
+  height: 100%;
+}
+html body {
+  height: 100%;
+}
+html body .vote_mask {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+html body .vote_mask .hint {
+  z-index: 2;
+  opacity: 1;
+  width: 60%;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  padding-top: 1rem;
+  border-radius: 0.2rem;
+}
+html body .vote_mask .hint .title {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E5E5E5;
+}
+html body .vote_mask .hint .title p {
+  font-size: 0.7rem;
+}
+html body .vote_mask .hint .mask_confirm button {
+  width: 100%;
+  height: 2rem;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-size: 0.6rem;
+}
+html body .vote_mask:after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '.';
+  background: #000;
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+}
+.vote-success {
+  /*  padding-top: 2rem; */
+}
+.vote-success .icon {
+  padding-top: 3.5rem;
+  text-align: center;
+}
+.vote-success .icon img {
+  display: inline-block;
+  width: 2.75rem;
+}
+.vote-success .icon p {
+  display: inline-block;
+  position: relative;
+  top: -1rem;
+  margin-left: 2rem;
+  font-size: 0.9rem;
+}
+.vote-success .thanks {
+  text-align: center;
+  position: relative;
+  top: -0.3rem;
+}
+.vote-success .thanks p.text {
+  font-size: 0.7rem;
+  display: inline-block;
+}
+.vote-success .thanks p.flower {
+  display: inline-block;
+}
+.vote-success .thanks p.flower img {
+  height: 0.8rem;
+}
+.vote-success .button {
+  margin-top: 1rem;
+  text-align: center;
+}
+.vote-success .button button {
+  width: 6rem;
+  height: 2rem;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  font-size: 0.7rem;
+}
+.vote-success .button button.confirm {
+  margin-left: 0.8rem;
+  background: #f8455a;
+}
+.vote-success .button button.back {
+  background: #bfbfbf;
+}
+.vote-success .subtext {
+  margin: 3rem auto 0;
+  font-size: 0.6rem;
+}
+.vote-success .subtext p {
+  text-align: center;
+}
